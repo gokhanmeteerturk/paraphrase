@@ -8,10 +8,8 @@ nltk.data.path.append('./nltk_models')
 
 # Load WordNet
 wordnet.ensure_loaded()
-
 # Load stopwords
 stop_words = stopwords.words('english')
-
 #retrieve synonym for root word
 def get_synonym(root):
 
@@ -38,7 +36,6 @@ def get_synonym(root):
         synonym = verb.verb_present(synonym, person=3, negate=False)
     print("Synonym final form: ", synonym)
     return synonym
-
 def get_paraphrase(input_str,verbs):
     list_str = input_str.split()
     stop = set(stopwords.words('english'))
@@ -53,10 +50,6 @@ def get_paraphrase(input_str,verbs):
             paraphrase.append(word)
     paraphrased_str = " ".join(paraphrase)
     return paraphrased_str
-
-
-input_str = "This company will eventually find a way of conquering that startup."
-
 def get_root(input_str):
     nlp = spacy.load("en_core_web_sm")
     doc = nlp(input_str)
@@ -65,7 +58,6 @@ def get_root(input_str):
         if token.dep_ == "ROOT":
             root = [token.text, token.tag_]
     return root
-
 def get_verbs(input_str):
     nlp = spacy.load("en_core_web_sm")
     doc = nlp(input_str)
@@ -76,7 +68,7 @@ def get_verbs(input_str):
     print("Verbs: ", verbs)
     return verbs
 
-# result = get_paraphrase(input_str,get_root(input_str))
-result = get_paraphrase(input_str,get_verbs(input_str))
 
+input_str = "This company will eventually find a way of conquering that startup."
+result = get_paraphrase(input_str,get_verbs(input_str))
 print(result)
